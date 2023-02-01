@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 
 @Entity(name = "accounts")
 public class Account {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -12,15 +13,22 @@ public class Account {
     @Column(nullable = false)
     private BigDecimal balance;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User user;
 
-    public Account() {
+    public Account() {}
+
+    public Account(BigDecimal balance) {
+        this.balance = balance;
     }
 
     public Account(BigDecimal balance, User user) {
         this.balance = balance;
         this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public int getId() {
@@ -39,11 +47,7 @@ public class Account {
         this.balance = balance;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User account) {
-        this.user = account;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

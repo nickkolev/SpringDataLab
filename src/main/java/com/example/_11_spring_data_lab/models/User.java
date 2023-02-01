@@ -1,13 +1,12 @@
 package com.example._11_spring_data_lab.models;
 
-
 import javax.persistence.*;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,6 +14,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private int age;
 
     @OneToMany(targetEntity = Account.class, mappedBy = "user")
@@ -56,7 +56,7 @@ public class User {
     }
 
     public Set<Account> getAccounts() {
-        return Collections.unmodifiableSet(accounts);
+        return accounts;
     }
 
     public void setAccounts(Set<Account> accounts) {
